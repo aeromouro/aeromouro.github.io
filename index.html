@@ -7,6 +7,13 @@
     /* Add your styles for the seat map here */
     .floor {
       margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .floor-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     .seat {
@@ -93,27 +100,12 @@
   <script>
     // サンプルデータ - サーバー/データベースから取得します
     const seatData = [
-      // 1階
-      { id: 'A1', status: 'available' },
-      { id: 'A2', status: 'available' },
-      { id: 'A3', status: 'available' },
-      { id: 'A4', status: 'available' },
-      { id: 'A5', status: 'available' },
-      { id: 'A6', status: 'available' },
-      { id: 'A7', status: 'available' },
-      { id: 'A8', status: 'available' },
-      { id: 'A9', status: 'available' },
-      { id: 'A10', status: 'available' },
-      // 2階
-      { id: 'B1', status: 'available' },
-      { id: 'B2', status: 'available' },
-      { id: 'B3', status: 'available' },
-      { id: 'B4', status: 'available' },
-      { id: 'B5', status: 'available' },
-      // 3階
-      { id: 'C1', status: 'available' },
-      { id: 'C2', status: 'available' },
-      { id: 'C3', status: 'available' },
+      // 1階 - 20 seats
+      ...Array(20).fill({ status: 'available' }).map((_, index) => ({ id: `A${index + 1}`, status: 'available' })),
+      // 2階 - 10 seats
+      ...Array(10).fill({ status: 'available' }).map((_, index) => ({ id: `B${index + 1}`, status: 'available' })),
+      // 3階 - 6 seats
+      ...Array(6).fill({ status: 'available' }).map((_, index) => ({ id: `C${index + 1}`, status: 'available' })),
     ];
 
     const floorDropdown = document.getElementById('floor-dropdown');
@@ -134,6 +126,12 @@
       seatsByFloors.forEach(floor => {
         const floorContainer = document.createElement('div');
         floorContainer.className = 'floor';
+
+        // Add floor title
+        const floorTitle = document.createElement('div');
+        floorTitle.className = 'floor-title';
+        floorTitle.textContent = '一般席';
+        floorContainer.appendChild(floorTitle);
 
         floor.forEach(seat => {
           const seatElement = document.createElement('div');

@@ -13,8 +13,13 @@
       width: 30px;
       height: 30px;
       margin: 5px;
-      display: inline-block;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      font-weight: bold;
     }
 
     .seat.available {
@@ -33,8 +38,17 @@
       margin-top: 10px;
     }
 
-    .info {
-      margin-top: 10px;
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-item .color-box {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -52,10 +66,18 @@
   </div>
 
   <div class="legend">
-    <p>凡例：</p>
-    <div class="seat available"></div> 利用可能
-    <div class="seat reserved"></div> 予約済み
-    <div class="seat paid"></div> 支払済み
+    <div class="legend-item">
+      <div class="color-box" style="background-color: #00ff00;"></div>
+      <span>利用可能</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-box" style="background-color: #ffff00;"></div>
+      <span>予約済み</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-box" style="background-color: #ff0000;"></div>
+      <span>支払済み</span>
+    </div>
   </div>
 
   <div id="floor-info" class="info">
@@ -110,7 +132,7 @@
         floor.forEach(seat => {
           const seatElement = document.createElement('div');
           seatElement.className = `seat ${seat.status}`;
-          seatElement.textContent = seat.id;
+          seatElement.textContent = floor.indexOf(seat) + 1; // Display seat number
 
           // クリックイベントリスナーを追加して座席の選択/非選択を処理
           seatElement.addEventListener('click', () => toggleSeatSelection(seat.id));

@@ -17,9 +17,15 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 1px solid black; /* Thin black border */
       border-radius: 10px;
       font-weight: bold;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .seat:hover {
+      transform: scale(1.1);
     }
 
     .seat.available {
